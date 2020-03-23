@@ -1,0 +1,35 @@
+# Executables, binaries, packages
+*.exe
+*.msi
+*.appx
+*.msix
+*.dll
+*.deb
+*.tar.gz
+*.zip
+*.rpm
+*.pkg
+*.nupkg
+*.AppImage
+
+# Windows
+thumbs.db
+~$*
+
+# MacOS
+.DS_STORE
+._.DS_STORE
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+.AppleDouble
+.LSOverride
