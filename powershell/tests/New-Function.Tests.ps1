@@ -55,6 +55,26 @@ Describe "New-Function" -Tag "CI" {
         "$NewFunctionTestPath\Test-PagingAndPositionalBinding.ps1" | Should -FileContentMatch ([regex]::Escape('[CmdletBinding(SupportsPaging,PositionalBinding=$False)]'))
         "$NewFunctionTestPath\Test-ShouldProcessPagingAndPositionalBinding.ps1" | Should -FileContentMatch ([regex]::Escape('[CmdletBinding(SupportsShouldProcess,SupportsPaging,PositionalBinding=$False)]'))
     }
+    It "Adds the Using Module clause when -UsingModule parameter is used" {
+        New-Function -Name "Test-UsingModule" -Path $NewFunctionTestPath -UsingModule "ExternalModule"
+        Get-Content -Raw "$NewFunctionTestPath\Test-UsingModule.ps1" | Should -Match "^Using Module ExternalModule\r?\n"
+    }
+    It "throws an error when an unapproved verb is used" {
+        { New-Function -Name "Trash-ThisPlace" -Path $NewFunctionTestPath } | Should -Throw
+        { New-Function -Verb "Pretend" -Noun "MakeBelieveCastle" -Path $NewFunctionTestPath } | Should -Throw
+    }
+    It "throws an error when an approved verb is used, but an invalid noun is used" {
+        { New-Function -Name "Test-Garbage9&#" -Path $NewFunctionTestPath } | Should -Throw
+        { New-Function -Verb "Test" -Noun "9999999999999@" -Path $NewFunctionTestPath } | Should -Throw
+        { New-Function -Name "Test-All-The-Things" -Path $NewFunctionTestPath } | Should -Throw
+    }
+    It "throws an error when an approved verb and a valid noun is used, but an invalid prefix is used" {
+        { New-Function -Name "Test-Everything" -Prefix "@#&" -Path $NewFunctionTestPath } | Should -Throw
+        { New-Function -Verb "Test" -Noun "EverythingAgain" -Prefix "///" -Path $NewFunctionTestPath } | Should -Throw
+    }
+    It "throws when an invalid parameter name is specified" {
+        { New-Function -Name "Test-AllTheThings" -Parameters "_-_" -Path $NewFunctionTestPath } | Should -Throw
+    }
     # Clean up after ourselves
     Remove-Item -Path $NewFunctionTestPath -Recurse -Force
 }
