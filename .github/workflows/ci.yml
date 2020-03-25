@@ -23,6 +23,8 @@ jobs:
       env:
         RUNNER_TEMP: ${{ runner.temp }}
       run: |
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Module Pester -MinimumVersion 4.0.0 -Force -SkipPublisherCheck
         $CodecovTargets = Get-ChildItem -Path .\powershell -Recurse -File -Include '*.ps1' -Exclude '*.Tests.ps1' -ErrorAction SilentlyContinue
         Get-ChildItem -Path .\powershell\modules -Directory -ErrorAction SilentlyContinue | % { Import-Module $_.FullName }
         Get-ChildItem -Path .\powershell\scripts -Recurse -File -Include '*.ps1' -Exclude '*.Tests.ps1' -ErrorAction SilentlyContinue | % { . $_.FullName }
