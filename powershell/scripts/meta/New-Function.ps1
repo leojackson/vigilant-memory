@@ -1,5 +1,3 @@
-
-
 Function New-Function {
 <#
 .SYNOPSIS
