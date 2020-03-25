@@ -54,13 +54,13 @@ The Outputs within the comment-based help for the new function.
 The Notes within the comment-based help for the new function.
 
 .PARAMETER SupportsShouldProcess
-Set the SupportsShouldProcess parameter of CmdletBinding for the new function.
+Set the SupportsShouldProcess parameter of CmdletBinding to $True for the new function.
 
 .PARAMETER SupportsPaging
-Set the SupportsPaging parameter of CmdletBinding for the new function.
+Set the SupportsPaging parameter of CmdletBinding to $True for the new function.
 
-.PARAMETER PositionalBinding
-Set the PositionalBinding parameter of CmdletBinding for the new function.
+.PARAMETER PositionalBindingOff
+Set the PositionalBinding parameter of CmdletBinding to $False for the new function.
 
 .EXAMPLE
 PS> New-Function -Verb "Get" -Noun "Widget"
@@ -207,7 +207,7 @@ param(
 
     [Parameter(Mandatory=$False,ValueFromPipelineByPropertyName)]
     [switch]
-    $PositionalBinding
+    $PositionalBindingOff
 )
 
 Begin {
@@ -215,6 +215,7 @@ Begin {
         "FullName" {
             $Verb = ($Name -split '-')[0]
             $Noun = ($Name -split '-')[1] -replace $Prefix,""
+            $Name = $Name -replace "-","-$Prefix"
             Break
         }
         "SplitName" {
@@ -231,8 +232,8 @@ Begin {
     If($SupportsPaging.IsPresent) {
         $CmdletBinding += "SupportsPaging"
     }
-    If($PositionalBinding.IsPresent) {
-        $CmdletBinding += "PositionalBinding"
+    If($PositionalBindingOff.IsPresent) {
+        $CmdletBinding += "PositionalBinding=`$False"
     }
 } # Begin
 
