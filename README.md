@@ -1,7 +1,7 @@
 # Vigilant Memory
 This is a collection of utility scripts and other helpful tools I've written throughout my career in IT. I'm putting them here both to keep track of them as well as in the hope that they are useful to anyone else.
 
-![Vigilant Memory CI](https://github.com/leojackson/vigilant-memory/workflows/Vigilant%20Memory%20CI/badge.svg) [![codecov](https://codecov.io/gh/leojackson/vigilant-memory/branch/master/graph/badge.svg)](https://codecov.io/gh/leojackson/vigilant-memory)
+![Vigilant Memory CI](https://github.com/leojackson/vigilant-memory/workflows/Vigilant%20Memory%20CI/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/leojackson/vigilant-memory/badge)](https://www.codefactor.io/repository/github/leojackson/vigilant-memory) [![codecov](https://codecov.io/gh/leojackson/vigilant-memory/branch/master/graph/badge.svg)](https://codecov.io/gh/leojackson/vigilant-memory) ![GitHub last commit](https://img.shields.io/github/last-commit/leojackson/vigilant-memory) ![GitHub top language](https://img.shields.io/github/languages/top/leojackson/vigilant-memory)
 
 ## PowerShell
 
