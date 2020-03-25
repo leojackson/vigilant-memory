@@ -1,4 +1,5 @@
 Describe "New-Function" -Tag "CI" {
+    # Create a new folder to hold all the files we're creating during the test
     $NewFunctionTestPath = "$Env:TEMP\vigilant-memory-newfunction"
     New-Item -Path $NewFunctionTestPath -ItemType Directory -Force
     It "creates a function in a file named after the function" {
