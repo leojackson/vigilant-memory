@@ -34,5 +34,5 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         RUNNER_TEMP: ${{ runner.temp }}
-      run: bash <(curl -s https://codecov.io/bash) -f $RUNNER_TEMP/codecoverage.xml
+      run: bash <(curl -s https://codecov.io/bash)
       shell: bash
