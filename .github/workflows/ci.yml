@@ -1,0 +1,36 @@
+name: Vigilant Memory CI
+
+on:
+  push:
+    branches:
+    - 'master'
+    paths:
+    - 'powershell/**'
+    - '**.ps1'
+  pull_request:
+    branches:
+    - 'master'
+    paths:
+    - 'powershell/**'
+    - '**.ps1'
+
+jobs:
+  pester:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run all Pester CI tests
+      env:
+        RUNNER_TEMP: ${{ runner.temp }}
+      run: |
+        $CodecovTargets = Get-ChildItem -Path .\powershell -Recurse -File -Include '*.ps1' -Exclude '*.Tests.ps1' -ErrorAction SilentlyContinue
+        Get-ChildItem -Path .\powershell\modules -Directory -ErrorAction SilentlyContinue | % { Import-Module $_.FullName }
+        Get-ChildItem -Path .\powershell\scripts -Recurse -File -Include '*.ps1' -Exclude '*.Tests.ps1' -ErrorAction SilentlyContinue | % { . $_.FullName }
+        Invoke-Pester -Script .\powershell -Strict -CodeCoverage $CodecovTargets -CodeCoverageOutputFile "$ENV:RUNNER_TEMP\codecoverage.xml"
+      shell: powershell
+    - name: Upload coverage to Codecov
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        RUNNER_TEMP: ${{ runner.temp }}
+      run: bash <(curl -s https://codecov.io/bash) -f $RUNNER_TEMP/codecoverage.xml
+      shell: bash
