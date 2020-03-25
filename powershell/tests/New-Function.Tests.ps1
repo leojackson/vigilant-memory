@@ -55,5 +55,6 @@ Describe "New-Function" -Tag "CI" {
         "$NewFunctionTestPath\Test-PagingAndPositionalBinding.ps1" | Should -FileContentMatch ([regex]::Escape('[CmdletBinding(SupportsPaging,PositionalBinding=$False)]'))
         "$NewFunctionTestPath\Test-ShouldProcessPagingAndPositionalBinding.ps1" | Should -FileContentMatch ([regex]::Escape('[CmdletBinding(SupportsShouldProcess,SupportsPaging,PositionalBinding=$False)]'))
     }
+    # Clean up after ourselves
     Remove-Item -Path $NewFunctionTestPath -Recurse -Force
 }
