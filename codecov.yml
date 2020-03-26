@@ -1,0 +1,41 @@
+codecov:
+  strict_yaml_branch: master
+  max_report_age: 24
+coverage:
+  range: 80..100
+  status:
+    project:
+      default: 
+        target: auto
+        threshold: 0%
+        base: auto
+        informational: true
+      powershell-modules:
+        target: 70%
+        threshold: 1%
+        base: auto
+        paths:
+          - "powershell/modules"
+        informational: true
+      powershell-scripts:
+        target: 50%
+        threshold: 1%
+        base: auto
+        paths:
+          - "powershell/scripts"
+    patch:
+      default:
+        target: auto
+        threshold: 0%
+        base: auto
+        branches:
+          - master
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        only_pulls: false
+        informational: true
+    changes: off
+comment:
+  layout: "reach, diff, files"
+  branches: master
