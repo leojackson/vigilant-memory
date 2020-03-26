@@ -39,3 +39,7 @@ coverage:
 comment:
   layout: "reach, diff, files"
   branches: master
+ignore:
+  - ".vscode"
+  - "**/.vscode"
+  - "**/*.Tests.ps1"
